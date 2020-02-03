@@ -433,7 +433,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _ANSELHbits 0 5 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 13 `i `uc ]
 "25
-[; ;ADC.c: 25:     }
+[; ;ADC.c: 25:         default: return 0;
+[e :U 156 ]
+[e ) -> -> 0 `i `c ]
+[e $UE 139  ]
+"26
+[; ;ADC.c: 26:     }
 }
 [e $U 140  ]
 [e :U 141 ]
@@ -451,37 +456,37 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 11 `i 153
  , $ -> 12 `i 154
  , $ -> 13 `i 155
- 140 ]
+ 156 ]
 [e :U 140 ]
-"26
-[; ;ADC.c: 26:     ADCON0bits.ADON=1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "27
-[; ;ADC.c: 27:     _delay((unsigned long)((2)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;ADC.c: 27:     ADCON0bits.ADON=1;
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "28
-[; ;ADC.c: 28:     ADCON0bits.GO=1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;ADC.c: 28:     _delay((unsigned long)((2)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "29
-[; ;ADC.c: 29:     resultado:
-[e :U 156 ]
+[; ;ADC.c: 29:     ADCON0bits.GO=1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
 "30
-[; ;ADC.c: 30:     if(ADCON0bits.GO_DONE==1){goto resultado;}
-[e $ ! == -> . . _ADCON0bits 3 1 `i -> 1 `i 157  ]
-{
-[e $U 156  ]
-}
-[e $U 158  ]
-"31
-[; ;ADC.c: 31:     else {ADCON0bits.ADON=0; return ADRESH;}
+[; ;ADC.c: 30:     resultado:
 [e :U 157 ]
+"31
+[; ;ADC.c: 31:     if(ADCON0bits.GO_DONE==1){goto resultado;}
+[e $ ! == -> . . _ADCON0bits 3 1 `i -> 1 `i 158  ]
+{
+[e $U 157  ]
+}
+[e $U 159  ]
+"32
+[; ;ADC.c: 32:     else {ADCON0bits.ADON=0; return ADRESH;}
+[e :U 158 ]
 {
 [e = . . _ADCON0bits 0 0 -> -> 0 `i `uc ]
 [e ) -> _ADRESH `c ]
 [e $UE 139  ]
 }
-[e :U 158 ]
-"32
-[; ;ADC.c: 32: }
+[e :U 159 ]
+"33
+[; ;ADC.c: 33: }
 [e :UE 139 ]
 }

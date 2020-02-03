@@ -1,4 +1,4 @@
-# 1 "Lab2.c"
+# 1 "7segmentos.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,15 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Lab2.c" 2
-
-
-
-
-
-
-
-
+# 1 "7segmentos.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2499,103 +2491,8 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 9 "Lab2.c" 2
+# 1 "7segmentos.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdlib.h" 1 3
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdlib.h" 2 3
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__null.h" 1 3
-# 6 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdlib.h" 2 3
-
-typedef unsigned short wchar_t;
-
-
-
-
-
-
-
-typedef struct {
- int rem;
- int quot;
-} div_t;
-typedef struct {
- unsigned rem;
- unsigned quot;
-} udiv_t;
-typedef struct {
- long quot;
- long rem;
-} ldiv_t;
-typedef struct {
- unsigned long quot;
- unsigned long rem;
-} uldiv_t;
-# 65 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdlib.h" 3
-extern double atof(const char *);
-extern double strtod(const char *, const char **);
-extern int atoi(const char *);
-extern unsigned xtoi(const char *);
-extern long atol(const char *);
-
-
-
-extern long strtol(const char *, char **, int);
-
-extern int rand(void);
-extern void srand(unsigned int);
-extern void * calloc(size_t, size_t);
-extern div_t div(int numer, int denom);
-extern udiv_t udiv(unsigned numer, unsigned denom);
-extern ldiv_t ldiv(long numer, long denom);
-extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
-
-
-
-extern unsigned long _lrotl(unsigned long value, unsigned int shift);
-extern unsigned long _lrotr(unsigned long value, unsigned int shift);
-extern unsigned int _rotl(unsigned int value, unsigned int shift);
-extern unsigned int _rotr(unsigned int value, unsigned int shift);
-
-
-
-
-extern void * malloc(size_t);
-extern void free(void *);
-extern void * realloc(void *, size_t);
-# 104 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdlib.h" 3
-extern int atexit(void (*)(void));
-extern char * getenv(const char *);
-extern char ** environ;
-extern int system(char *);
-extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
-extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
-extern int abs(int);
-extern long labs(long);
-
-extern char * itoa(char * buf, int val, int base);
-extern char * utoa(char * buf, unsigned val, int base);
-
-
-
-
-extern char * ltoa(char * buf, long val, int base);
-extern char * ultoa(char * buf, unsigned long val, int base);
-
-extern char * ftoa(float f, int * status);
-# 10 "Lab2.c" 2
-
-# 1 "./ADC.h" 1
-# 15 "./ADC.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2729,33 +2626,27 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 15 "./ADC.h" 2
-
-void configADC(void);
-int8_t lecADC(int8_t x);
-# 11 "Lab2.c" 2
-
-# 1 "./7segmentos.h" 1
-# 15 "./7segmentos.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
-# 15 "./7segmentos.h" 2
+# 2 "7segmentos.c" 2
 
 
-void segmentos(uint8_t PUERTO, uint8_t numero);
-# 12 "Lab2.c" 2
-
-void configIO(void);
-
-void main(void) {
-    configIO();
-    configADC();
-    lecADC(1);
-}
-void configIO(){
-    TRISB=0b00000111;
-    TRISC=0;
-    TRISD=0;
-    PORTB=0;
-    PORTC=0;
-    PORTD=0;
+void segmentos(uint8_t PUERTO, uint8_t numero){
+    switch(numero){
+        case 0: PUERTO=63;
+        case 1: PUERTO=6;
+        case 2: PUERTO=91;
+        case 3: PUERTO=79;
+        case 4: PUERTO= 102;
+        case 5: PUERTO= 109;
+        case 6: PUERTO= 125;
+        case 7: PUERTO= 7;
+        case 8: PUERTO= 127;
+        case 9: PUERTO= 111;
+        case 10: PUERTO= 119;
+        case 11: PUERTO= 124;
+        case 12: PUERTO= 57;
+        case 13: PUERTO= 94;
+        case 14: PUERTO= 121;
+        case 15: PUERTO= 161;
+        default: PUERTO=0;
+    }
 }

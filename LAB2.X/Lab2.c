@@ -8,10 +8,14 @@
 
 #include <xc.h>
 #include <stdlib.h>
+#include "ADC.h"
+#include "7segmentos.h"
 void configIO(void);
 
 void main(void) {
     configIO();
+    configADC();
+    lecADC(1);
 }
 void configIO(){
     TRISB=0b00000111;

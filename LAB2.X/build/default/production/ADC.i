@@ -2650,6 +2650,7 @@ int8_t lecADC(int8_t x){
         case 11: TRISBbits.TRISB4=1; ANSELHbits.ANS11=1; ADCON0bits.CHS=11;
         case 12: TRISBbits.TRISB0=1; ANSELHbits.ANS12=1; ADCON0bits.CHS=12;
         case 13: TRISBbits.TRISB5=1; ANSELHbits.ANS13=1; ADCON0bits.CHS=13;
+        default: return 0;
     }
     ADCON0bits.ADON=1;
     _delay((unsigned long)((2)*(4000000/4000.0)));
