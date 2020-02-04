@@ -1,4 +1,4 @@
-#include <xc.h>
+#include <xc.h> 
 #include <stdint.h>
 
 void segmentos(uint8_t PUERTO, uint8_t numero){

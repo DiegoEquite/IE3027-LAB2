@@ -34,11 +34,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.05</languageToolchainVersion>
+        <languageToolchainVersion>2.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC16Fxxx_DFP" vendor="Microchip" version="1.0.7"/>
+        <pack name="PIC16Fxxx_DFP" vendor="Microchip" version="1.0.9"/>
       </packs>
       <compileType>
         <linkerTool>
