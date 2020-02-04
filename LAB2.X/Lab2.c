@@ -25,7 +25,7 @@
 
 
 #include <xc.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 #include "ADC.h" 
 #include "7segmentos.h" 
 
@@ -35,9 +35,9 @@ void main(void) {
     configIO();
     configADC();
     while(1){
-        vanalog=lecADC(1);
+        vanalog=lecADC(8);
         PORTC=vanalog;
-        segmentos(PORTD,0);
+        PORTD=segmentos(0);
     }
 }
 void configIO(){

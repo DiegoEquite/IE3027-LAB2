@@ -321,124 +321,138 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"5 ADC.c
-[; ;ADC.c: 5: void configADC(){
+"8 ADC.c
+[; ;ADC.c: 8: void configADC(){
 [v _configADC `(v ~T0 @X0 1 ef ]
 {
 [e :U _configADC ]
 [f ]
-"6
-[; ;ADC.c: 6:     ADCON0bits.ADCS=1;
+"9
+[; ;ADC.c: 9:     ADCON0bits.ADCS=1;
 [e = . . _ADCON0bits 0 3 -> -> 1 `i `uc ]
-"7
-[; ;ADC.c: 7:     ADCON1=0;
+"10
+[; ;ADC.c: 10:     ADCON1=0;
 [e = _ADCON1 -> -> 0 `i `uc ]
-"8
-[; ;ADC.c: 8: }
+"11
+[; ;ADC.c: 11: }
 [e :UE 138 ]
 }
-"9
-[; ;ADC.c: 9: int8_t lecADC(int8_t x){
-[v _lecADC `(c ~T0 @X0 1 ef1`c ]
+"12
+[; ;ADC.c: 12: uint8_t lecADC(uint8_t x){
+[v _lecADC `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _lecADC ]
-[v _x `c ~T0 @X0 1 r1 ]
+[v _x `uc ~T0 @X0 1 r1 ]
 [f ]
-"10
-[; ;ADC.c: 10:     switch(x){
+"13
+[; ;ADC.c: 13:     switch(x){
 [e $U 141  ]
 {
-"11
-[; ;ADC.c: 11:         case 0: TRISAbits.TRISA0=1; ANSELbits.ANS0=1; ADCON0bits.CHS=0;
+"14
+[; ;ADC.c: 14:         case 0: TRISAbits.TRISA0=1; ANSELbits.ANS0=1; ADCON0bits.CHS=0; break;
 [e :U 142 ]
 [e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 0 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
-"12
-[; ;ADC.c: 12:         case 1: TRISAbits.TRISA1=1; ANSELbits.ANS1=1; ADCON0bits.CHS=1;
+[e $U 140  ]
+"15
+[; ;ADC.c: 15:         case 1: TRISAbits.TRISA1=1; ANSELbits.ANS1=1; ADCON0bits.CHS=1; break;
 [e :U 143 ]
 [e = . . _TRISAbits 0 1 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 1 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
-"13
-[; ;ADC.c: 13:         case 2: TRISAbits.TRISA2=1; ANSELbits.ANS2=1; ADCON0bits.CHS=2;
+[e $U 140  ]
+"16
+[; ;ADC.c: 16:         case 2: TRISAbits.TRISA2=1; ANSELbits.ANS2=1; ADCON0bits.CHS=2; break;
 [e :U 144 ]
 [e = . . _TRISAbits 0 2 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 2 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 2 `i `uc ]
-"14
-[; ;ADC.c: 14:         case 3: TRISAbits.TRISA3=1; ANSELbits.ANS3=1; ADCON0bits.CHS=3;
+[e $U 140  ]
+"17
+[; ;ADC.c: 17:         case 3: TRISAbits.TRISA3=1; ANSELbits.ANS3=1; ADCON0bits.CHS=3; break;
 [e :U 145 ]
 [e = . . _TRISAbits 0 3 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 3 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 3 `i `uc ]
-"15
-[; ;ADC.c: 15:         case 4: TRISAbits.TRISA5=1; ANSELbits.ANS4=1; ADCON0bits.CHS=4;
+[e $U 140  ]
+"18
+[; ;ADC.c: 18:         case 4: TRISAbits.TRISA5=1; ANSELbits.ANS4=1; ADCON0bits.CHS=4; break;
 [e :U 146 ]
 [e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 4 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 4 `i `uc ]
-"16
-[; ;ADC.c: 16:         case 5: TRISEbits.TRISE0=1; ANSELbits.ANS5=1; ADCON0bits.CHS=5;
+[e $U 140  ]
+"19
+[; ;ADC.c: 19:         case 5: TRISEbits.TRISE0=1; ANSELbits.ANS5=1; ADCON0bits.CHS=5; break;
 [e :U 147 ]
 [e = . . _TRISEbits 0 0 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 5 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 5 `i `uc ]
-"17
-[; ;ADC.c: 17:         case 6: TRISEbits.TRISE2=1; ANSELbits.ANS6=1; ADCON0bits.CHS=6;
+[e $U 140  ]
+"20
+[; ;ADC.c: 20:         case 6: TRISEbits.TRISE2=1; ANSELbits.ANS6=1; ADCON0bits.CHS=6; break;
 [e :U 148 ]
 [e = . . _TRISEbits 0 2 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 6 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 6 `i `uc ]
-"18
-[; ;ADC.c: 18:         case 7: TRISEbits.TRISE3=1; ANSELbits.ANS7=1; ADCON0bits.CHS=7;
+[e $U 140  ]
+"21
+[; ;ADC.c: 21:         case 7: TRISEbits.TRISE3=1; ANSELbits.ANS7=1; ADCON0bits.CHS=7; break;
 [e :U 149 ]
 [e = . . _TRISEbits 0 3 -> -> 1 `i `uc ]
 [e = . . _ANSELbits 0 7 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 7 `i `uc ]
-"19
-[; ;ADC.c: 19:         case 8: TRISBbits.TRISB2=1; ANSELHbits.ANS8=1; ADCON0bits.CHS=8;
+[e $U 140  ]
+"22
+[; ;ADC.c: 22:         case 8: TRISBbits.TRISB2=1; ANSELHbits.ANS8=1; ADCON0bits.CHS=8; break;
 [e :U 150 ]
 [e = . . _TRISBbits 0 2 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 0 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 8 `i `uc ]
-"20
-[; ;ADC.c: 20:         case 9: TRISBbits.TRISB3=1; ANSELHbits.ANS9=1; ADCON0bits.CHS=9;
+[e $U 140  ]
+"23
+[; ;ADC.c: 23:         case 9: TRISBbits.TRISB3=1; ANSELHbits.ANS9=1; ADCON0bits.CHS=9; break;
 [e :U 151 ]
 [e = . . _TRISBbits 0 3 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 1 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 9 `i `uc ]
-"21
-[; ;ADC.c: 21:         case 10: TRISBbits.TRISB1=1; ANSELHbits.ANS10=1; ADCON0bits.CHS=10;
+[e $U 140  ]
+"24
+[; ;ADC.c: 24:         case 10: TRISBbits.TRISB1=1; ANSELHbits.ANS10=1; ADCON0bits.CHS=10; break;
 [e :U 152 ]
 [e = . . _TRISBbits 0 1 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 2 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 10 `i `uc ]
-"22
-[; ;ADC.c: 22:         case 11: TRISBbits.TRISB4=1; ANSELHbits.ANS11=1; ADCON0bits.CHS=11;
+[e $U 140  ]
+"25
+[; ;ADC.c: 25:         case 11: TRISBbits.TRISB4=1; ANSELHbits.ANS11=1; ADCON0bits.CHS=11; break;
 [e :U 153 ]
 [e = . . _TRISBbits 0 4 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 3 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 11 `i `uc ]
-"23
-[; ;ADC.c: 23:         case 12: TRISBbits.TRISB0=1; ANSELHbits.ANS12=1; ADCON0bits.CHS=12;
+[e $U 140  ]
+"26
+[; ;ADC.c: 26:         case 12: TRISBbits.TRISB0=1; ANSELHbits.ANS12=1; ADCON0bits.CHS=12; break;
 [e :U 154 ]
 [e = . . _TRISBbits 0 0 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 4 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 12 `i `uc ]
-"24
-[; ;ADC.c: 24:         case 13: TRISBbits.TRISB5=1; ANSELHbits.ANS13=1; ADCON0bits.CHS=13;
+[e $U 140  ]
+"27
+[; ;ADC.c: 27:         case 13: TRISBbits.TRISB5=1; ANSELHbits.ANS13=1; ADCON0bits.CHS=13; break;
 [e :U 155 ]
 [e = . . _TRISBbits 0 5 -> -> 1 `i `uc ]
 [e = . . _ANSELHbits 0 5 -> -> 1 `i `uc ]
 [e = . . _ADCON0bits 0 2 -> -> 13 `i `uc ]
-"25
-[; ;ADC.c: 25:         default: return 0;
+[e $U 140  ]
+"28
+[; ;ADC.c: 28:         default: return 0;
 [e :U 156 ]
-[e ) -> -> 0 `i `c ]
+[e ) -> -> 0 `i `uc ]
 [e $UE 139  ]
-"26
-[; ;ADC.c: 26:     }
+"29
+[; ;ADC.c: 29:     }
 }
 [e $U 140  ]
 [e :U 141 ]
@@ -458,35 +472,35 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 13 `i 155
  156 ]
 [e :U 140 ]
-"27
-[; ;ADC.c: 27:     ADCON0bits.ADON=1;
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-"28
-[; ;ADC.c: 28:     _delay((unsigned long)((2)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"29
-[; ;ADC.c: 29:     ADCON0bits.GO=1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
 "30
-[; ;ADC.c: 30:     resultado:
-[e :U 157 ]
+[; ;ADC.c: 30:     ADCON0bits.ADON=1;
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "31
-[; ;ADC.c: 31:     if(ADCON0bits.GO_DONE==1){goto resultado;}
+[; ;ADC.c: 31:     _delay((unsigned long)((2)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"32
+[; ;ADC.c: 32:     ADCON0bits.GO=1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"33
+[; ;ADC.c: 33:     resultado:
+[e :U 157 ]
+"34
+[; ;ADC.c: 34:     if(ADCON0bits.GO_DONE==1){goto resultado;}
 [e $ ! == -> . . _ADCON0bits 3 1 `i -> 1 `i 158  ]
 {
 [e $U 157  ]
 }
 [e $U 159  ]
-"32
-[; ;ADC.c: 32:     else {ADCON0bits.ADON=0; return ADRESH;}
+"35
+[; ;ADC.c: 35:     else {ADCON0bits.ADON=0; return ADRESH;}
 [e :U 158 ]
 {
 [e = . . _ADCON0bits 0 0 -> -> 0 `i `uc ]
-[e ) -> _ADRESH `c ]
+[e ) _ADRESH ]
 [e $UE 139  ]
 }
 [e :U 159 ]
-"33
-[; ;ADC.c: 33: }
+"36
+[; ;ADC.c: 36: }
 [e :UE 139 ]
 }

@@ -14,6 +14,6 @@
 #include <xc.h> // include processor files - each processor file is guarded. 
 #include <stdint.h>
 void configADC(void);
-int8_t lecADC(int8_t x);
+uint8_t lecADC(uint8_t x);
 #endif	/* XC_HEADER_TEMPLATE_H */
 

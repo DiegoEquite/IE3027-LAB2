@@ -14,7 +14,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
 
-void segmentos(uint8_t PUERTO, uint8_t numero);
+uint8_t segmentos(uint8_t numero);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

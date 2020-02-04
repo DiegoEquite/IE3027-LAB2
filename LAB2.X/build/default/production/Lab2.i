@@ -2751,7 +2751,7 @@ typedef uint16_t uintptr_t;
 # 15 "./ADC.h" 2
 
 void configADC(void);
-int8_t lecADC(int8_t x);
+uint8_t lecADC(uint8_t x);
 # 29 "Lab2.c" 2
 
 # 1 "./7segmentos.h" 1
@@ -2760,7 +2760,7 @@ int8_t lecADC(int8_t x);
 # 15 "./7segmentos.h" 2
 
 
-void segmentos(uint8_t PUERTO, uint8_t numero);
+uint8_t segmentos(uint8_t numero);
 # 30 "Lab2.c" 2
 
 
@@ -2770,9 +2770,9 @@ void main(void) {
     configIO();
     configADC();
     while(1){
-        vanalog=lecADC(1);
+        vanalog=lecADC(8);
         PORTC=vanalog;
-        segmentos(PORTD,0);
+        PORTD=segmentos(0);
     }
 }
 void configIO(){
