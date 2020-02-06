@@ -2764,7 +2764,14 @@ uint8_t segmentos(uint8_t numero);
 # 30 "Lab2.c" 2
 
 
+void __attribute__((picinterrupt(("")))) ISR(void){
+    if(INTCONbits.TMR0IF==1){
+        INTCONbits.TMR0IF=0;
+        TMR0 = 217;
+        PORTA=PORTA+1;}
+}
 void configIO(void);
+
 uint8_t vanalog;
 void main(void) {
     configIO();
@@ -2775,11 +2782,26 @@ void main(void) {
         PORTD=segmentos(0);
     }
 }
+
+
 void configIO(){
+    TRISA=0;
     TRISB=0b00000111;
     TRISC=0;
     TRISD=0;
+    PORTA=0;
     PORTB=0;
     PORTC=0;
     PORTD=0;
+    OSCCON= 0B01100111;
+    INTCONbits.TMR0IE = 1;
+    INTCONbits.TMR0IF=0;
+    INTCONbits.GIE = 1;
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.T0SE = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 217;
 }

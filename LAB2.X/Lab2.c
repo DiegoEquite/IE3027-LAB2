@@ -25,11 +25,18 @@
 
 
 #include <xc.h>
-#include <stdlib.h> 
-#include "ADC.h" 
-#include "7segmentos.h" 
-
+#include <stdlib.h>  
+#include "ADC.h"  
+#include "7segmentos.h"  
+#define _XTAL_FREQ 4000000
+void __interrupt() ISR(void){
+    if(INTCONbits.TMR0IF==1){
+        INTCONbits.TMR0IF=0;
+        TMR0 = 217;
+        PORTA=PORTA+1;}
+}
 void configIO(void);
+
 uint8_t vanalog; 
 void main(void) {
     configIO();
@@ -40,11 +47,26 @@ void main(void) {
         PORTD=segmentos(0);
     }
 }
+
+
 void configIO(){
+    TRISA=0;
     TRISB=0b00000111;
     TRISC=0;
     TRISD=0;
+    PORTA=0;
     PORTB=0;
     PORTC=0;
     PORTD=0;
+    OSCCON= 0B01100111;
+    INTCONbits.TMR0IE = 1;
+    INTCONbits.TMR0IF=0;
+    INTCONbits.GIE = 1;
+    OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
+    OPTION_REGbits.T0SE = 0;  // bit 4 TMR0 Source Edge Select bit 0 = low/high 1 = high/low
+    OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
+    OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 217;  
 }
