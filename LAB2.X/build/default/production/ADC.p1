@@ -476,8 +476,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;ADC.c: 30:     ADCON0bits.ADON=1;
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
 "31
-[; ;ADC.c: 31:     _delay((unsigned long)((2)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;ADC.c: 31:     _delay((unsigned long)((50)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
 "32
 [; ;ADC.c: 32:     ADCON0bits.GO=1;
 [e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]

@@ -2655,7 +2655,7 @@ uint8_t segmentos(uint8_t numero){
         case 12: return 57; break;
         case 13: return 94; break;
         case 14: return 121; break;
-        case 15: return 161; break;
+        case 15: return 113; break;
         default: return 0;
     }
 }

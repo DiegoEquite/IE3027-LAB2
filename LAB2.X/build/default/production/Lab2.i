@@ -33,7 +33,6 @@
 
 
 
-
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2518,7 +2517,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 27 "Lab2.c" 2
+# 26 "Lab2.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -2611,7 +2610,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 28 "Lab2.c" 2
+# 27 "Lab2.c" 2
 
 # 1 "./ADC.h" 1
 # 15 "./ADC.h"
@@ -2752,7 +2751,7 @@ typedef uint16_t uintptr_t;
 
 void configADC(void);
 uint8_t lecADC(uint8_t x);
-# 29 "Lab2.c" 2
+# 28 "Lab2.c" 2
 
 # 1 "./7segmentos.h" 1
 # 15 "./7segmentos.h"
@@ -2761,25 +2760,45 @@ uint8_t lecADC(uint8_t x);
 
 
 uint8_t segmentos(uint8_t numero);
-# 30 "Lab2.c" 2
+# 29 "Lab2.c" 2
 
 
-void __attribute__((picinterrupt(("")))) ISR(void){
-    if(INTCONbits.TMR0IF==1){
-        INTCONbits.TMR0IF=0;
-        TMR0 = 217;
-        PORTA=PORTA+1;}
+uint8_t vanalog;
+uint8_t x=0;
+uint8_t unidad;
+uint8_t decena;
+uint8_t contador=0;
+uint8_t contador2=0;
+void __attribute__((picinterrupt(("")))) ISR(){
+    if(TMR0IF==1){
+        TMR0IF=0;
+        TMR0 = 237;
+        x++;
+        if(x==1){PORTD=0;PORTD=segmentos(unidad);PORTE=1;}
+        else if(x==2){PORTD=0;PORTD=segmentos(decena);PORTE=2;x=0;};
+    }
+    if(INTCONbits.RBIF==1){
+        if(PORTBbits.RB0==0){contador++;}
+        if(PORTBbits.RB1==0){contador--;}
+        INTCONbits.RBIF=0;
+    }
+
 }
 void configIO(void);
 
-uint8_t vanalog;
+
 void main(void) {
     configIO();
     configADC();
     while(1){
+        PORTA=contador2;
+        PORTC=contador;
         vanalog=lecADC(8);
-        PORTC=vanalog;
-        PORTD=segmentos(0);
+        unidad=vanalog & 15;
+        decena=vanalog;
+        decena =decena>>4;
+        if(vanalog>contador){PORTEbits.RE2=1;}
+        else{PORTEbits.RE2=0;}
     }
 }
 
@@ -2789,13 +2808,20 @@ void configIO(){
     TRISB=0b00000111;
     TRISC=0;
     TRISD=0;
-    PORTA=0;
+    TRISE=0;
+    PORTE=0;
     PORTB=0;
     PORTC=0;
     PORTD=0;
+    ANSEL=0;
+    ANSELH=0;
     OSCCON= 0B01100111;
     INTCONbits.TMR0IE = 1;
     INTCONbits.TMR0IF=0;
+    INTCONbits.RBIE=1;
+    INTCONbits.RBIF=0;
+    IOCBbits.IOCB0=1;
+    IOCBbits.IOCB1=1;
     INTCONbits.GIE = 1;
     OPTION_REGbits.T0CS = 0;
     OPTION_REGbits.T0SE = 0;
@@ -2803,5 +2829,6 @@ void configIO(){
     OPTION_REGbits.PS2 = 1;
     OPTION_REGbits.PS1 = 1;
     OPTION_REGbits.PS0 = 1;
-    TMR0 = 217;
+    TMR0 = 237;
+
 }

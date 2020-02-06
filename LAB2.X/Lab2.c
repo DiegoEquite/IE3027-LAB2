@@ -23,28 +23,47 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
-
 #include <xc.h>
 #include <stdlib.h>  
 #include "ADC.h"  
 #include "7segmentos.h"  
 #define _XTAL_FREQ 4000000
-void __interrupt() ISR(void){
-    if(INTCONbits.TMR0IF==1){
-        INTCONbits.TMR0IF=0;
-        TMR0 = 217;
-        PORTA=PORTA+1;}
+uint8_t vanalog;
+uint8_t x=0;
+uint8_t unidad;
+uint8_t decena;
+uint8_t contador=0;
+uint8_t contador2=0;
+void __interrupt() ISR(){
+    if(TMR0IF==1){
+        TMR0IF=0;
+        TMR0 = 237;
+        x++;
+        if(x==1){PORTD=0;PORTD=segmentos(unidad);PORTE=1;}
+        else if(x==2){PORTD=0;PORTD=segmentos(decena);PORTE=2;x=0;};
+    }
+    if(INTCONbits.RBIF==1){
+        if(PORTBbits.RB0==0){contador++;}
+        if(PORTBbits.RB1==0){contador--;}
+        INTCONbits.RBIF=0;
+    }
+        
 }
 void configIO(void);
 
-uint8_t vanalog; 
+
 void main(void) {
     configIO();
     configADC();
     while(1){
+        PORTA=contador2;
+        PORTC=contador;
         vanalog=lecADC(8);
-        PORTC=vanalog;
-        PORTD=segmentos(0);
+        unidad=vanalog & 15;
+        decena=vanalog;
+        decena =decena>>4;
+        if(vanalog>contador){PORTEbits.RE2=1;}
+        else{PORTEbits.RE2=0;}
     }
 }
 
@@ -54,13 +73,20 @@ void configIO(){
     TRISB=0b00000111;
     TRISC=0;
     TRISD=0;
-    PORTA=0;
+    TRISE=0;
+    PORTE=0;
     PORTB=0;
     PORTC=0;
     PORTD=0;
+    ANSEL=0;
+    ANSELH=0;
     OSCCON= 0B01100111;
     INTCONbits.TMR0IE = 1;
     INTCONbits.TMR0IF=0;
+    INTCONbits.RBIE=1;
+    INTCONbits.RBIF=0;
+    IOCBbits.IOCB0=1;
+    IOCBbits.IOCB1=1;
     INTCONbits.GIE = 1;
     OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
     OPTION_REGbits.T0SE = 0;  // bit 4 TMR0 Source Edge Select bit 0 = low/high 1 = high/low
@@ -68,5 +94,6 @@ void configIO(){
     OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
     OPTION_REGbits.PS1 = 1;
     OPTION_REGbits.PS0 = 1;
-    TMR0 = 217;  
+    TMR0 = 237;  
+    
 }
