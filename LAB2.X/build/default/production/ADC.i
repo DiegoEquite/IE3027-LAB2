@@ -2664,7 +2664,7 @@ uint8_t lecADC(uint8_t x){
         default: return 0;
     }
     ADCON0bits.ADON=1;
-    _delay((unsigned long)((50)*(4000000/4000000.0)));
+    _delay((unsigned long)((20)*(4000000/4000000.0)));
     ADCON0bits.GO=1;
     resultado:
     if(ADCON0bits.GO_DONE==1){goto resultado;}

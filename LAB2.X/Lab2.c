@@ -35,17 +35,17 @@ uint8_t decena;
 uint8_t contador=0;
 uint8_t contador2=0;
 void __interrupt() ISR(){
-    if(TMR0IF==1){
-        TMR0IF=0;
-        TMR0 = 237;
-        x++;
-        if(x==1){PORTD=0;PORTD=segmentos(unidad);PORTE=1;}
-        else if(x==2){PORTD=0;PORTD=segmentos(decena);PORTE=2;x=0;};
-    }
     if(INTCONbits.RBIF==1){
         if(PORTBbits.RB0==0){contador++;}
         if(PORTBbits.RB1==0){contador--;}
         INTCONbits.RBIF=0;
+    }
+    if(TMR0IF==1){
+        TMR0IF=0;
+        TMR0 = 240;
+        if(x==1){PORTD=segmentos(unidad);PORTE=1;}
+        else if(x==2){PORTD=segmentos(decena);PORTE=2;x=0;};
+        x++;
     }
         
 }
@@ -94,6 +94,6 @@ void configIO(){
     OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
     OPTION_REGbits.PS1 = 1;
     OPTION_REGbits.PS0 = 1;
-    TMR0 = 237;  
+    TMR0 = 240;  
     
 }
