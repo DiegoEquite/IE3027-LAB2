@@ -1,7 +1,7 @@
 #include <xc.h> 
 #include <stdint.h>
 #include "7segmentos.h"
-
+//conversion ingresa el numero y regresa el valor para mostrarlo en el display 7 segmentos
 uint8_t segmentos(uint8_t numero){
     switch(numero){
         case 0: return 63; break;

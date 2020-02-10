@@ -10,7 +10,7 @@ void configADC(){
     ADCON1=0;
 }
 uint8_t lecADC(uint8_t x){
-    switch(x){
+    switch(x){ //configura los pines en analogicos, entradas y selecciona el canal adecuado
         case 0: TRISAbits.TRISA0=1; ANSELbits.ANS0=1; ADCON0bits.CHS=0; break;
         case 1: TRISAbits.TRISA1=1; ANSELbits.ANS1=1; ADCON0bits.CHS=1; break;
         case 2: TRISAbits.TRISA2=1; ANSELbits.ANS2=1; ADCON0bits.CHS=2; break;
@@ -26,7 +26,7 @@ uint8_t lecADC(uint8_t x){
         case 12: TRISBbits.TRISB0=1; ANSELHbits.ANS12=1; ADCON0bits.CHS=12; break;
         case 13: TRISBbits.TRISB5=1; ANSELHbits.ANS13=1; ADCON0bits.CHS=13; break;
         default: return 0;
-    }
+    }//habilita la conversion ADC y retorna el valor ADRESH
     ADCON0bits.ADON=1;
     __delay_us(20);
     ADCON0bits.GO=1;
